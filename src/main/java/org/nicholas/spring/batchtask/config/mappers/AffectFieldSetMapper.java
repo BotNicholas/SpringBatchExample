@@ -12,6 +12,7 @@ import org.springframework.validation.BindException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 
 public class AffectFieldSetMapper implements FieldSetMapper<Affect> {
@@ -47,7 +48,11 @@ public class AffectFieldSetMapper implements FieldSetMapper<Affect> {
         try {
             affect.setDirection(directions.get(fieldSet.readString("Direction")));
             affect.setYear(fieldSet.readInt("Year"));
-            affect.setDate(format.parse(fieldSet.readString("Date")));
+
+            Date date = format.parse(fieldSet.readString("Date"));
+            LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            affect.setDate(localDate);
+
             affect.setWeekday(fieldSet.readString("Weekday"));
             affect.setCountry(countries.get(fieldSet.readString("Country")));
             affect.setCommodity(fieldSet.readString("Commodity"));

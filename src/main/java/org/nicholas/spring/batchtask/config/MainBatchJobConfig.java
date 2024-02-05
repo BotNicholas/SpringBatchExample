@@ -34,7 +34,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 @PropertySource("classpath:files.properties")
-@EnableBatchProcessing //needed to initialize all batch metadata
+//@EnableBatchProcessing //needed to initialize all batch metadata
+//Having said that, please note in particular that the effect of @EnableBatchProcessing in a Spring Boot app has changed with 3.0.0. It now disables the Spring Batch auto-configuration and the schema initialization behavior you're looking for.
 public class MainBatchJobConfig {
 
     @Autowired

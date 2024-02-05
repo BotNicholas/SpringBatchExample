@@ -33,7 +33,7 @@ import java.util.HashMap;
 
 @Configuration
 @PropertySource("classpath:files.properties")
-@EnableBatchProcessing
+//@EnableBatchProcessing
 public class SecondBatchJobConfig {
     @Autowired
     private JobRepository jobRepository;

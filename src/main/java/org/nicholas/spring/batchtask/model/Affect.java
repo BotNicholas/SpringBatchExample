@@ -22,7 +22,7 @@ public class Affect {
     @Min(1990)
     private Integer year;
     @NotNull
-    private Date date;
+    private LocalDate date;
     @NotEmpty
     private String weekday;
     @ManyToOne
@@ -44,7 +44,7 @@ public class Affect {
     public Affect() {
     }
 
-    public Affect(Direction direction, Integer year, Date date, String weekday, Country country, String commodity, String transportMode, String measure, Long value, Long cumulative) {
+    public Affect(Direction direction, Integer year, LocalDate date, String weekday, Country country, String commodity, String transportMode, String measure, Long value, Long cumulative) {
         this.direction = direction;
         this.year = year;
         this.date = date;
@@ -81,11 +81,11 @@ public class Affect {
         this.year = year;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

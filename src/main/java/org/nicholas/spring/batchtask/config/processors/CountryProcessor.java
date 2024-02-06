@@ -1,6 +1,5 @@
 package org.nicholas.spring.batchtask.config.processors;
 
-import jakarta.validation.Validator;
 import org.nicholas.spring.batchtask.model.Country;
 import org.springframework.batch.item.ItemProcessor;
 
@@ -15,7 +14,6 @@ public class CountryProcessor implements ItemProcessor<Country, Country> {
 
     @Override
     public synchronized Country process(Country item) throws Exception {
-
         if (!countrySet.contains(item)) {
                 countrySet.add(item);
             return item;

@@ -30,21 +30,18 @@ public class ProcessingController {
     @PostMapping("/main")
     public ResponseEntity<String> export() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
         launcher.run(mainJob, jobParameters());
-
         return new ResponseEntity<String>("Data has been successfully transferred!", HttpStatus.OK);
     }
 
     @PostMapping("/second")
     public ResponseEntity<String> saveToFile() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
         launcher.run(saveToFileJob, jobParameters());
-
         return new ResponseEntity<>("All data has been saved successfully!", HttpStatus.OK);
     }
 
     private JobParameters jobParameters(){
         JobParametersBuilder parameters = new JobParametersBuilder();
-        parameters.addLong("startAt", System.currentTimeMillis()); //here we have to pass something. It does not even matter what
-
+        parameters.addLong("startAt", System.currentTimeMillis());
         return parameters.toJobParameters();
     }
 }

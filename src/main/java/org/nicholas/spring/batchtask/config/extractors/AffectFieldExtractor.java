@@ -7,15 +7,15 @@ public class AffectFieldExtractor implements FieldExtractor<Affect> {
     @Override
     public Object[] extract(Affect item) {
         return new Object[]{item.getDirection().getDirectionName(),
-                item.getYear(),
-                item.getDate(),
-                item.getWeekday(),
-                item.getCountry().getCountryName(),
-                item.getCommodity(),
-                item.getTransportMode(),
-                item.getMeasure(),
-                item.getValue().toString(),
-                item.getCumulative().toString()
+                            item.getYear(),
+                            item.getDate(),
+                            item.getWeekday(),
+                            item.getCountry().getCountryName(),
+                            item.getCommodity(),
+                            item.getTransportMode(),
+                            item.getMeasure(),
+                            item.getValue().toString(),
+                            item.getCumulative().toString()
         };
     }
 }

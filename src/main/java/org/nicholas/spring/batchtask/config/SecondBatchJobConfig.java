@@ -18,12 +18,14 @@ import org.springframework.batch.item.file.FlatFileHeaderCallback;
 import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.transform.DelimitedLineAggregator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.PlatformTransactionManager;
 
@@ -47,6 +49,10 @@ public class SecondBatchJobConfig {
     @Autowired
     private AffectRepo affectRepo;
 
+    @Autowired
+    @Qualifier("taskExecutor")
+    TaskExecutor taskExecutor;
+
     @Value("${file.output}")
     private String FILE_OUT;
 
@@ -64,7 +70,7 @@ public class SecondBatchJobConfig {
                 .reader(reader())
                 .processor(processor())
                 .writer(writer())
-                .taskExecutor(taskExecutor())
+                .taskExecutor(taskExecutor)
                 .build();
     }
 
@@ -104,19 +110,5 @@ public class SecondBatchJobConfig {
         lineAggregator.setDelimiter(",");
         lineAggregator.setFieldExtractor(new AffectFieldExtractor());
         return lineAggregator;
-    }
-
-//    Will be useful for simple table. Our table has relations
-//    private BeanWrapperFieldExtractor<Affect> fieldExtractor(){
-//        BeanWrapperFieldExtractor<Affect> fieldExtractor = new BeanWrapperFieldExtractor<>();
-//        fieldExtractor.setNames(fields...);
-//    }
-
-
-    @Bean
-    public SimpleAsyncTaskExecutor taskExecutor(){
-        SimpleAsyncTaskExecutor taskExecutor = new SimpleAsyncTaskExecutor();
-        taskExecutor.setConcurrencyLimit(100);
-        return taskExecutor;
     }
 }

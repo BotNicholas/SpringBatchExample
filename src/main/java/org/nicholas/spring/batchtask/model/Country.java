@@ -2,7 +2,6 @@ package org.nicholas.spring.batchtask.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
 
 import java.util.Objects;
 
@@ -12,8 +11,8 @@ public class Country{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "country_name")
     @NotEmpty
+    @Column(name = "country_name")
     private String countryName;
 
     public Country() {

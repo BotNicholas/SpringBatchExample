@@ -7,7 +7,6 @@ import org.springframework.batch.repeat.RepeatStatus;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 public class FileMovingTasklet implements Tasklet {
     private final String FROM;
@@ -29,13 +28,12 @@ public class FileMovingTasklet implements Tasklet {
         String[] composedName = composeName(oldName);
         StringBuilder newName = new StringBuilder();
 
-        for (int i=0; i<composedName.length-1; i++) { //without last part (.csv)
-            newName.append(composedName[i] + ".");
+        for (int i=0; i<composedName.length-1; i++) {
+            newName.append(composedName[i]).append(".");
         }
-
-        newName.deleteCharAt(newName.lastIndexOf(".")); //removing last "."
-        newName.append("_" + System.currentTimeMillis()); //add Current Time in millis
-        newName.append("."+composedName[composedName.length-1]);
+        newName.deleteCharAt(newName.lastIndexOf("."));
+        newName.append("_").append(System.currentTimeMillis());
+        newName.append(".").append(composedName[composedName.length - 1]);
 
         return newName.toString();
     }

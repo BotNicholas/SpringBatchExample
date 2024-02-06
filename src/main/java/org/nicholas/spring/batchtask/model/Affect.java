@@ -15,9 +15,9 @@ public class Affect {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "direction_id", referencedColumnName = "id")
-    @NotNull
     private Direction direction;
     @Min(1990)
     private Integer year;
@@ -25,14 +25,14 @@ public class Affect {
     private LocalDate date;
     @NotEmpty
     private String weekday;
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "country_id", referencedColumnName = "id")
-    @NotNull
     private Country country;
     @NotEmpty
     private String commodity;
-    @Column(name = "transport_mode")
     @NotEmpty
+    @Column(name = "transport_mode")
     private String transportMode;
     @NotEmpty
     private String measure;

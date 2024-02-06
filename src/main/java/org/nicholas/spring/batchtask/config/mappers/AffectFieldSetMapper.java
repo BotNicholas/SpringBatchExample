@@ -32,7 +32,6 @@ public class AffectFieldSetMapper implements FieldSetMapper<Affect> {
         if (countries.isEmpty() && directions.isEmpty()) {
             List<Country> countriesList = countryRepo.findAll();
             List<Direction> directionsList = directionRepo.findAll();
-
             countriesList.forEach(country -> countries.put(country.getCountryName(), country));
             directionsList.forEach(direction -> directions.put(direction.getDirectionName(), direction));
         }
@@ -42,7 +41,7 @@ public class AffectFieldSetMapper implements FieldSetMapper<Affect> {
     public Affect mapFieldSet(FieldSet fieldSet) throws BindException {
         initMaps();
 
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy"); //cant extract because job is executed in multithreading mode
 
         Affect affect = new Affect();
         try {
